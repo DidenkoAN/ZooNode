@@ -25,6 +25,11 @@ class animalController {
     res.json();
   }
 
+  async getAnimal(req, res) {
+    const animalsAll = await animals.findOne({ where: { id: id } });
+    res.json({ animalsAll });
+  }
+
   async getAnimals(req, res) {
     const animalsAll = await animals.findAll();
     res.json({ animalsAll });

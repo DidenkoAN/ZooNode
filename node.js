@@ -3,6 +3,22 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./db");
 const router = require("./router/index");
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+const storageConfig = multer.diskStorage({
+  destination: (req, photo, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, photo, cb) => {
+    const uniqueSuffix = uuidv4(); // генерируем уникальный идентификатор
+    const fileExtension = photo.originalname.split(".").pop(); // расширение файла
+    const filename = `${uniqueSuffix}.${fileExtension}`;
+    req.body.photo = filename;
+    cb(null, filename);
+  },
+});
+app.use(express.static(__dirname));
+app.use(multer({ storage: storageConfig }).single("photo"));
 
 PORT = 5000;
 
