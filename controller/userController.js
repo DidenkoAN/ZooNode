@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 class userController {
   async registration(req, res) {
     const { name, email, password, phone } = req.body;
+    const _user = await users.findOne({ where: { email: email } });
+    if (_user) return res.status(404).json({ error: "E-mail is used" });
     const hashPassword = await bcrypt.hash(password, 5);
     const user = await users.create({
       name: name,
@@ -19,10 +21,9 @@ class userController {
     const { email, password } = req.body;
 
     const user = await users.findOne({ where: { email: email } });
-    if (!user) return res.status(404).json({ error: "Пользователь не найден" });
+    if (!user) return res.status(404).json({ error: "User not found" });
     const inPassword = bcrypt.compareSync(password, user.password);
-    if (!inPassword)
-      return res.status(404).json({ error: "Пользователь не найден" });
+    if (!inPassword) return res.status(404).json({ error: "User not found" });
     res.json({ user });
   }
 
