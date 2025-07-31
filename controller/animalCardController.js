@@ -46,7 +46,9 @@ class animalCardController {
   }
 
   async update(req, res) {
-    const { id, params } = req.body;
+    const { id } = req.body;
+    const params = req.body;
+    delete params.id;
     await animalCards.update(params, { where: { id: id } });
 
     res.json();
