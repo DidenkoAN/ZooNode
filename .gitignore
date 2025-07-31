@@ -1,1 +1,25 @@
-node_modules
+# Логи
+*.log
+npm-debug.log*
+
+# Директория node_modules
+node_modules/
+
+# Файлы .env
+.env
+.env.local
+.env.production
+.env.development
+.env.staging
+
+# Файлы сборки
+dist/
+build/
+.next/
+
+# Файлы IDE и редакторов
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.swp

@@ -22,7 +22,6 @@ class animalCardController {
       food: food,
       removed: 0,
     });
-    console.log(animalCard);
     res.json({ animalCard });
   }
 
