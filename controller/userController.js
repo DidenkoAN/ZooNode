@@ -29,8 +29,7 @@ class userController {
 
   async deleteProfile(req, res) {
     const { id } = req.body;
-    await users.destroy({ where: { id: id } });
-
+    await users.update({ removed: 1 }, { where: { id: id } });
     res.json();
   }
 
