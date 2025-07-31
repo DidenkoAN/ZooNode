@@ -17,8 +17,12 @@ class userController {
 
   async authorization(req, res) {
     const { email, password } = req.body;
+
     const user = await users.findOne({ where: { email: email } });
+    if (!user) return res.status(404).json({ error: "Пользователь не найден" });
     const inPassword = bcrypt.compareSync(password, user.password);
+    if (!inPassword)
+      return res.status(404).json({ error: "Пользователь не найден" });
     res.json({ user });
   }
 
@@ -30,7 +34,7 @@ class userController {
   }
 
   async getUsers(req, res) {
-    const usersAll = await users.findAll({ where: { removed: 0 } });
+    const usersAll = await users.findAll({});
     res.json({ usersAll });
   }
 }
