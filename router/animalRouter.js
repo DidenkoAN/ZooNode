@@ -6,6 +6,6 @@ router.post("/add", animalController.add);
 router.get("/get", animalController.getAnimals);
 router.get("/getOne", animalController.getAnimal);
 router.delete("/delete", animalController.deleteAnimal);
-router.post("/updete", animalController.update);
+router.post("/update", animalController.update);
 
 module.exports = router;

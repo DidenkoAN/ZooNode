@@ -4,6 +4,7 @@ npm-debug.log*
 
 # Директория node_modules
 node_modules/
+uploads/
 
 # Файлы .env
 .env
